@@ -1,4 +1,4 @@
-package dev.volkovs.tools;
+package dev.volkovs.office.tool.invoice.generator;
 
 import com.lowagie.text.Font;
 import com.lowagie.text.pdf.BaseFont;
@@ -14,7 +14,7 @@ import fr.opensagres.xdocreport.template.formatter.FieldsMetadata;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.poi.openxml4j.util.ZipSecureFile;
 import org.apache.poi.xwpf.usermodel.XWPFDocument;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -26,12 +26,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Slf4j
-public class DocxGeneratorTest {
+class DocxGeneratorTest {
 
     private static final String TEMPLATE_NAME = "DocxProjectWithFreemarkerList";
 
     @Test
-    public void xdocreport() throws IOException, XDocReportException {
+    void xdocreport() throws IOException, XDocReportException {
         // 1) Load Docx file by filling Freemarker template engine and cache it to the registry
         InputStream in = DocxGeneratorTest.class.getClassLoader().getResourceAsStream(TEMPLATE_NAME + ".docx");
         IXDocReport report = XDocReportRegistry.getRegistry().loadReport(in, TemplateEngineKind.Freemarker);
@@ -56,7 +56,7 @@ public class DocxGeneratorTest {
     }
 
     @Test
-    public void convertDocxToPdf() throws IOException {
+    void convertDocxToPdf() throws IOException {
         String fileOutName = "target/" + TEMPLATE_NAME + ".pdf";
 
         long startTime = System.currentTimeMillis();

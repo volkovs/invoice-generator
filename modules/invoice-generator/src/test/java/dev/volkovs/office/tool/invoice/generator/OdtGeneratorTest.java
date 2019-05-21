@@ -1,9 +1,9 @@
-package dev.volkovs.tools;
+package dev.volkovs.office.tool.invoice.generator;
 
 import com.google.common.collect.Maps;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -13,10 +13,10 @@ import java.util.Map;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 @Slf4j
-public class OdtGeneratorTest {
+class OdtGeneratorTest {
 
     @Test
-    public void generate() throws FileNotFoundException {
+    void generate() throws FileNotFoundException {
         TestModel model = new TestModel("Opa");
 
         // building model

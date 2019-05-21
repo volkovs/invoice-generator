@@ -1,4 +1,4 @@
-package dev.volkovs.tools;
+package dev.volkovs.office.tool.invoice.generator;
 
 import java.io.InputStream;
 import java.io.OutputStream;

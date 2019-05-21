@@ -1,4 +1,4 @@
-package dev.volkovs.tools;
+package dev.volkovs.office.tool.invoice.generator;
 
 import com.google.common.base.Throwables;
 import fr.opensagres.xdocreport.core.XDocReportException;
