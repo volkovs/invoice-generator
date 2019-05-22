@@ -17,6 +17,7 @@ public class Settings {
     private Map<String, Company> agreements;
     private BigDecimal vatPercent;
     private String currency;
+    private String targetFolder;
 
     private String invoiceTemplateName = "templates/standard-invoice.docx";
 

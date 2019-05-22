@@ -6,6 +6,7 @@ import dev.volkovs.office.tool.invoice.model.InvoiceItem;
 import dev.volkovs.office.tool.invoice.model.spi.LocaleProvider;
 import dev.volkovs.office.tool.invoice.model.spi.ModelEnhancer;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Iterator;
@@ -42,6 +43,7 @@ public class ModelEnhancerExample implements ModelEnhancer {
         }
 
         item.setName(generateItemName(model.getDate()));
+        model.setTotalAmountWords(new LvAmount2WordConverter(model.getTotalToBePaid()).toWords());
     }
 
     @VisibleForTesting

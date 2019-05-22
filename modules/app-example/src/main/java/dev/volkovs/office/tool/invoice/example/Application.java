@@ -20,7 +20,6 @@ public class Application {
 
     public static void main(String... args) throws IOException {
         Settings settings = getSettings();
-        log.info(settings.toString());
         Scanner scanner = new Scanner(System.in);
         System.out.println("Please type in company to charge:");
         String companyToCharge = scanner.nextLine();

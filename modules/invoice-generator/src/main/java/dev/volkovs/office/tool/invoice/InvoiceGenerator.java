@@ -35,7 +35,7 @@ public class InvoiceGenerator {
 
         String templateName = settings.getInvoiceTemplateName();
         InputStream template = getClass().getClassLoader().getResourceAsStream(templateName);
-        File documentName = new File(new InvoiceFileNameGenerator().generate(invoice));
+        File documentName = new File(settings.getTargetFolder(), new InvoiceFileNameGenerator().generate(invoice));
         if (documentName.exists()) {
             throw new RuntimeException(format("Document already exists (%s)", documentName.getAbsolutePath()));
         }

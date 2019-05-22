@@ -62,10 +62,12 @@ public class LvInvoiceNumberSequence implements InvoiceNumberSequence {
         String fileName = fileNameFor(currentInvoiceNumber);
         File currentInvoiceNumberFile = new File(this.sequenceFolder, year + "/" + fileName);
         if (currentInvoiceNumberFile.length() == 0) {
-            String message = "Previous invoice number %s was not approved.\n" +
-                    "To review  please type:\nopen %s\n" +
-                    "To approve please type:\necho approved > %s";
-            throw new RuntimeException(format(message, fileName, currentInvoiceNumberFile.getParentFile().getAbsolutePath(), currentInvoiceNumberFile.getAbsolutePath()));
+            String message = "Previous invoice number %s was not approved.\n\n" +
+                    "To review  please type:\nopen %s\n\n" +
+                    "To approve please type:\necho approved > %s\n\n" +
+                    "To retry please type:\nrm %s";
+            String fileFqn = currentInvoiceNumberFile.getAbsolutePath();
+            throw new RuntimeException(format(message, fileName, currentInvoiceNumberFile.getParentFile().getAbsolutePath(), fileFqn, fileFqn));
         }
     }
 

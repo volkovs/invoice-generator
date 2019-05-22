@@ -52,10 +52,6 @@ public class ModelGenerator {
         invoice.setTotalAmountBeforeTax(sum(invoice, InvoiceItem::getTotalAmountBeforeTax));
         invoice.setTotalTaxAmount(sum(invoice, InvoiceItem::getTotalTaxAmount));
         invoice.setTotalToBePaid(sum(invoice, InvoiceItem::getTotalToBePaid));
-
-        // TODO:
-        invoice.setTotalAmountWords("Divi tukstoši seši simti deviņdesmit eiro 22 centi");
-
         return invoice;
     }
 
