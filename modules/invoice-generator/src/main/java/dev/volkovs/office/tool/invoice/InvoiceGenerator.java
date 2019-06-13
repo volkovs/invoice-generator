@@ -2,6 +2,7 @@ package dev.volkovs.office.tool.invoice;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import dev.volkovs.office.tool.invoice.generator.DocxGenerator;
+import dev.volkovs.office.tool.invoice.generator.PdfConverter;
 import dev.volkovs.office.tool.invoice.model.Invoice;
 import dev.volkovs.office.tool.invoice.model.flat.Inv;
 import dev.volkovs.office.tool.invoice.model.input.InvoiceInput;
@@ -31,6 +32,7 @@ public class InvoiceGenerator {
         ModelConverter modelConverter = ServiceLoader.load(ModelConverter.class).iterator().next();
         Inv inv = modelConverter.convert(invoice);
 
+        @SuppressWarnings("unchecked")
         Map<String, Object> beans = mapper.convertValue(inv, Map.class);
 
         String templateName = settings.getInvoiceTemplateName();
@@ -45,6 +47,19 @@ public class InvoiceGenerator {
 
         log.info("Invoice successfully generated:");
         log.info(format("open %s", documentName.getAbsolutePath()));
+
+        log.info("Converting to PDF");
+        convertToPdf(documentName);
+    }
+
+    void convertToPdf(File docx) {
+        File pdf = new File(docx.getAbsolutePath().replace(".docx", ".pdf"));
+        if (pdf.exists()) {
+            throw new RuntimeException(format("Document already exists (%s)", pdf.getAbsolutePath()));
+        }
+
+        PdfConverter.convertTo(docx, pdf);
+        log.info(format("PDF generated successfully: %s", pdf.getAbsolutePath()));
     }
 
 }
