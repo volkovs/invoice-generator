@@ -9,10 +9,12 @@ import dev.volkovs.office.tool.invoice.model.spi.InvoiceNumberSequence;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ServiceLoader;
 import java.util.function.Function;
 
 import static java.lang.String.format;
+import static java.time.temporal.TemporalAdjusters.firstDayOfMonth;
 import static java.time.temporal.TemporalAdjusters.lastDayOfMonth;
 import static java.util.stream.Collectors.toList;
 
@@ -37,11 +39,15 @@ public class ModelGenerator {
                 .orElseThrow(() -> new RuntimeException(format("Company %s is not registered in settings", companyToCharge)));
         companyAgreement.setAgreementNumber(agreementNumber);
         companyAgreement.setServiceConsumer(settings.getAgreements().get(agreementNumber));
+        String agreementDateString = settings.getAgreementDates().get(agreementNumber);
+        companyAgreement.setAgreementDate(LocalDate.parse(agreementDateString, DateTimeFormatter.ofPattern("yyyy-MM-dd")));
 
         Invoice invoice = new Invoice();
         invoice.setCompanyAgreement(companyAgreement);
         invoice.setDate(LocalDate.now());
-        invoice.setDue(LocalDate.now().with(lastDayOfMonth()));
+        invoice.setDue(LocalDate.now().plusMonths(1));
+        invoice.setWorkPeriodFirstDay(LocalDate.now().minusMonths(1).with(firstDayOfMonth()));
+        invoice.setWorkPeriodLastDay(LocalDate.now().minusMonths(1).with(lastDayOfMonth()));
         invoice.setNumber(sequence.next());
         invoice.setItems(input.getItems().stream()
                 .map(item -> InvoiceItem.valueOf(item, settings))

@@ -15,6 +15,7 @@ public class Settings {
 
     private Company sender;
     private Map<String, Company> agreements;
+    private Map<String, String> agreementDates;
     private BigDecimal vatPercent;
     private String currency;
     private String targetFolder;
@@ -24,8 +25,8 @@ public class Settings {
     public Optional<String> findAgreementNumberByCompanyName(String companyToCharge) {
         AtomicReference<String> agreementFound = new AtomicReference<>();
         agreements.forEach((agreement, company) -> {
-            String fullCompanyName = company.getName().toUpperCase();
-            if (fullCompanyName.contains(companyToCharge.toUpperCase())) {
+            String fullCompanyName = company.getName().toUpperCase().replace("-", "");
+            if (fullCompanyName.contains(companyToCharge.toUpperCase().replace("-", ""))) {
                 agreementFound.set(agreement);
             }
         });

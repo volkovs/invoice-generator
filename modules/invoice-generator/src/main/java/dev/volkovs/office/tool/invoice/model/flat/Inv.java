@@ -54,7 +54,7 @@ public class Inv {
     // total to be paid
     private String ttlTbp;
 
-    // this fields affords to be long
+    // this fields name affords to be long
     private String totalAmountWords;
 
     // invoice items

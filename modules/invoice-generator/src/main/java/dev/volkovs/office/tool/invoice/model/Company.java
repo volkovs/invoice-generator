@@ -10,4 +10,5 @@ public class Company {
     private String address;
     private String phoneNumber;
     private BankAccount bankAccount = new BankAccount();
+    private String ceo;
 }

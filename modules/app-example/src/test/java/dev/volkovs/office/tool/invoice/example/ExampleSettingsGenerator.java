@@ -48,18 +48,21 @@ class ExampleSettingsGenerator {
         sender.setAddress("Provajderu 3B, Rīga LV-1050");
         sender.setPhoneNumber("+371 29123456");
         sender.setBankAccount(bankAccount);
+        sender.setCeo("John Doe");
 
         Company partner1 = new Company();
         partner1.setName("Tails Consulting SIA");
         partner1.setRegistrationNumber("40203101234");
         partner1.setTaxPayerNumber("LV40203101234");
         partner1.setAddress("Astu prospekts 486, LV-2050");
+        partner1.setCeo("John Snow");
 
         Company partner2 = new Company();
         partner2.setName("Airworld SIA");
         partner2.setRegistrationNumber("40303101234");
         partner2.setTaxPayerNumber("LV40303101234");
         partner2.setAddress("Marupe, LV-2050");
+        partner2.setCeo("Johny");
 
         Map<String, Company> agreements = new HashMap<>();
         agreements.put("2018-01-01", partner1);

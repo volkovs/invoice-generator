@@ -40,7 +40,7 @@ public class PdfConverter {
             XWPFDocument document = new XWPFDocument(docxSource);
             PdfOptions options = PdfOptions.create().fontEncoding("utf-8");
             options.fontProvider((familyName, encoding, size, style, color) -> {
-                String fontLocation = "src/main/resources/Arial Unicode.ttf";
+                String fontLocation = "../invoice-generator/src/main/resources/Arial Unicode.ttf";
                 try {
                     BaseFont bfChinese = BaseFont.createFont(fontLocation, BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
                     Font fontChinese = new Font(bfChinese, size, style, color);
@@ -49,7 +49,7 @@ public class PdfConverter {
                     }
                     return fontChinese;
                 } catch (Exception e) {
-                    log.error("Error creating font " + fontLocation, e);
+                    log.error("Error creating font " + new File(fontLocation).getAbsolutePath(), e);
                     // An error occurs, use the default font provider.
                     return ITextFontRegistry.getRegistry().getFont(familyName, encoding, size, style, color);
                 }

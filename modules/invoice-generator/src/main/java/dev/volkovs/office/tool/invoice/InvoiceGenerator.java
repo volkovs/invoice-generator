@@ -17,6 +17,8 @@ import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.util.Map;
 import java.util.ServiceLoader;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import static java.lang.String.format;
 
@@ -48,8 +50,19 @@ public class InvoiceGenerator {
         log.info("Invoice successfully generated:");
         log.info(format("open %s", documentName.getAbsolutePath()));
 
-        log.info("Converting to PDF");
-        convertToPdf(documentName);
+//        log.info("Converting to PDF");
+//        convertToPdf(documentName);
+
+        log.info("To approve type: ");
+
+        // e.g. XXX-11/2019
+        String invoiceNumberString = invoice.getNumber();
+        Matcher matcher = Pattern.compile("(.+)/(.+)").matcher(invoiceNumberString);
+        if (matcher.matches()) {
+            String invoiceNumber = matcher.group(1);
+            String invoiceYear = matcher.group(2);
+            log.info(format("echo approved > /Users/mihails.volkovs/.invoice-generator/invoice-number/%s/%s", invoiceYear, invoiceNumber));
+        }
     }
 
     void convertToPdf(File docx) {

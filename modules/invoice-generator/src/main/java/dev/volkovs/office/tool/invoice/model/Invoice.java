@@ -13,6 +13,8 @@ public class Invoice {
 
     private LocalDate date;
     private LocalDate due;
+    private LocalDate workPeriodFirstDay;
+    private LocalDate workPeriodLastDay;
 
     private String number;
 
