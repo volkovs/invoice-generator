@@ -47,13 +47,14 @@ public class InvoiceGenerator {
 
         new DocxGenerator().generate(template, beans, document);
 
-        log.info("Invoice successfully generated:");
-        log.info(format("open %s", documentName.getAbsolutePath()));
+        System.out.println("Invoice successfully generated:");
+        System.out.println(format("open %s", documentName.getParentFile().getAbsolutePath()));
+        System.out.println(format("open %s", documentName.getAbsolutePath()));
 
 //        log.info("Converting to PDF");
 //        convertToPdf(documentName);
 
-        log.info("To approve type: ");
+        System.out.println("To approve type: ");
 
         // e.g. XXX-11/2019
         String invoiceNumberString = invoice.getNumber();
@@ -61,7 +62,7 @@ public class InvoiceGenerator {
         if (matcher.matches()) {
             String invoiceNumber = matcher.group(1);
             String invoiceYear = matcher.group(2);
-            log.info(format("echo approved > /Users/mihails.volkovs/.invoice-generator/invoice-number/%s/%s", invoiceYear, invoiceNumber));
+            System.out.println(format("echo approved > /Users/mihails.volkovs/.invoice-generator/invoice-number/%s/%s", invoiceYear, invoiceNumber));
         }
     }
 

@@ -49,6 +49,7 @@ public class Application {
         if (!settingsFile.exists()) {
             throw new RuntimeException(String.format("Settings file does not exist (%s)", settingsFile.getAbsolutePath()));
         }
+        log.info("Reading settings from {}", settingsFile.getAbsolutePath());
         return new ObjectMapper().readValue(new FileInputStream(settingsFile), Settings.class);
     }
 
